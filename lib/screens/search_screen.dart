@@ -25,7 +25,7 @@ class _SearchScreenState extends State<SearchScreen> {
           child: TextFormField(
             controller: searchController,
             decoration:
-                const InputDecoration(labelText: 'Search for a user...'),
+                const InputDecoration(hintText: "search users"),
             onFieldSubmitted: (String _) {
               setState(() {
                 isShowUsers = true;
@@ -89,26 +89,44 @@ class _SearchScreenState extends State<SearchScreen> {
                   );
                 }
 
-                return StaggeredGridView.countBuilder(
-                  crossAxisCount: 3,
-                  itemCount: (snapshot.data! as dynamic).docs.length,
-                  itemBuilder: (context, index) => Image.network(
-                    (snapshot.data! as dynamic).docs[index]['postUrl'],
-                    fit: BoxFit.cover,
-                  ),
-                  staggeredTileBuilder: (index) => MediaQuery.of(context)
-                              .size
-                              .width >
-                          webScreenSize
-                      ? StaggeredTile.count(
-                          (index % 7 == 0) ? 1 : 1, (index % 7 == 0) ? 1 : 1)
-                      : StaggeredTile.count(
-                          (index % 7 == 0) ? 2 : 1, (index % 7 == 0) ? 2 : 1),
-                  mainAxisSpacing: 8.0,
-                  crossAxisSpacing: 8.0,
-                );
+                return MasonryGridView.builder(
+                    itemCount: (snapshot.data! as dynamic).docs.length,
+                    gridDelegate:
+                        const SliverSimpleGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 3),
+                    itemBuilder: (context, index) {
+                      return ClipRRect(
+                        borderRadius: BorderRadius.circular(8),
+                        child: Image.network(
+                          (snapshot.data! as dynamic).docs[index]['postUrl'],
+                          fit: BoxFit.cover,
+                        ),
+                      );
+                    });
               },
             ),
     );
   }
 }
+
+
+
+
+// StaggeredGridView.countBuilder(
+//                   crossAxisCount: 3,
+//                   itemCount: (snapshot.data! as dynamic).docs.length,
+//                   itemBuilder: (context, index) => Image.network(
+//                     (snapshot.data! as dynamic).docs[index]['postUrl'],
+//                     fit: BoxFit.cover,
+//                   ),
+//                   staggeredTileBuilder: (index) => MediaQuery.of(context)
+//                               .size
+//                               .width >
+//                           webScreenSize
+//                       ? StaggeredTile.count(
+//                           (index % 7 == 0) ? 1 : 1, (index % 7 == 0) ? 1 : 1)
+//                       : StaggeredTile.count(
+//                           (index % 7 == 0) ? 2 : 1, (index % 7 == 0) ? 2 : 1),
+//                   mainAxisSpacing: 8.0,
+//                   crossAxisSpacing: 8.0,
+//                 );
