@@ -47,7 +47,8 @@ class _MobileScreenLayoutState extends State<MobileScreenLayout> {
 
   @override
   Widget build(BuildContext context) {
-    final model.User user = Provider.of<UserProvider>(context).getUser;
+    //
+    // final user = Provider.of<UserProvider>(context).getUser;
     return Scaffold(
       body: PageView(
         controller: pageController,
@@ -57,9 +58,11 @@ class _MobileScreenLayoutState extends State<MobileScreenLayout> {
           const SearchScreen(),
           const AddPostScreen(),
           const NotificationPage(),
-          ProfileScreen(
-              //persists
-              uid: user.uid),
+
+          const DEmoProfileScreen()
+          // ProfileScreen(
+          //     //persists
+          //     uid: user.uid),
         ],
       ),
       bottomNavigationBar: CupertinoTabBar(
@@ -108,5 +111,14 @@ class _MobileScreenLayoutState extends State<MobileScreenLayout> {
         currentIndex: _page,
       ),
     );
+  }
+}
+
+class DEmoProfileScreen extends StatelessWidget {
+  const DEmoProfileScreen({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return const Placeholder();
   }
 }
