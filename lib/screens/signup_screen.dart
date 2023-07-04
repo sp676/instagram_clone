@@ -164,14 +164,8 @@ class _SignupScreenState extends State<SignupScreen> {
                   height: 24,
                 ),
                 InkWell(
+                  onTap: signUpUser,
                   child: Container(
-                    child: !_isLoading
-                        ? const Text(
-                            'Sign up',
-                          )
-                        : const CircularProgressIndicator(
-                            color: primaryColor,
-                          ),
                     width: double.infinity,
                     alignment: Alignment.center,
                     padding: const EdgeInsets.symmetric(vertical: 12),
@@ -181,8 +175,14 @@ class _SignupScreenState extends State<SignupScreen> {
                       ),
                       color: blueColor,
                     ),
+                    child: !_isLoading
+                        ? const Text(
+                            'Sign up',
+                          )
+                        : const CircularProgressIndicator(
+                            color: primaryColor,
+                          ),
                   ),
-                  onTap: signUpUser,
                 ),
                 // const SizedBox(
                 //   height: 12,
@@ -197,10 +197,10 @@ class _SignupScreenState extends State<SignupScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Container(
+                      padding: const EdgeInsets.symmetric(vertical: 8),
                       child: const Text(
                         'Already have an account?',
                       ),
-                      padding: const EdgeInsets.symmetric(vertical: 8),
                     ),
                     GestureDetector(
                       onTap: () => Navigator.of(context).push(
@@ -209,13 +209,13 @@ class _SignupScreenState extends State<SignupScreen> {
                         ),
                       ),
                       child: Container(
+                        padding: const EdgeInsets.symmetric(vertical: 8),
                         child: const Text(
                           ' Login.',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        padding: const EdgeInsets.symmetric(vertical: 8),
                       ),
                     ),
                   ],
